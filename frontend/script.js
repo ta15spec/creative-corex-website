@@ -1,4 +1,6 @@
-const API_URL = window.location.origin; // Use current domain
+const API_URL = window.location.origin.startsWith('file:') || window.location.origin === 'null'
+  ? 'http://localhost:3000'
+  : window.location.origin;
 const ADMIN_PASSWORD = 'creativecorex2024'; // Change this!
 
 // State

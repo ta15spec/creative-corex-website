@@ -26,7 +26,7 @@ if (!fs.existsSync(uploadsDir)) {
 // Configure Multer for file uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -197,9 +197,14 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', message: 'Creative Corex Gallery API' });
 });
 
-// Serve index.html for all other routes (SPA support)
+// Serve index.html for all other GET routes (SPA support) - must be last!
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+  // Only serve index.html for non-API routes
+  if (!req.path.startsWith('/api/')) {
+    res.sendFile(path.join(__dirname, '../frontend', 'index.html'));
+  } else {
+    res.status(404).json({ error: 'API endpoint not found' });
+  }
 });
 
 app.listen(PORT, () => {
