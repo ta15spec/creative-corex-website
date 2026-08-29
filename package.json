@@ -1,0 +1,16 @@
+{
+  "name": "instagram-gallery",
+  "version": "1.0.0",
+  "description": "Creative Corex - Professional AI Art Gallery",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "install": "cd backend && npm install"
+  },
+  "engines": {
+    "node": ">=14.x"
+  },
+  "keywords": ["gallery", "ai-art", "portfolio"],
+  "author": "Creative Corex",
+  "license": "MIT"
+}

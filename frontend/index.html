@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative Corex - AI Art & Digital Creations. Download high-quality AI-generated images.">
+  <title>Creative Corex | AI Art Gallery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">✦</span>
+        <span class="logo-text">Creative Corex</span>
+      </div>
+      <div class="nav-links">
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="https://instagram.com/creativecorex" target="_blank" class="nav-link">Instagram</a>
+        <button class="admin-btn" id="adminBtn">Admin</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">AI Art & Digital Creations</h1>
+      <p class="hero-subtitle">Explore and download high-quality AI-generated artwork by Creative Corex</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number" id="totalImages">0</span>
+          <span class="stat-label">Artworks</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number" id="totalDownloads">2.4K+</span>
+          <span class="stat-label">Downloads</span>
+        </div>
+        <div class="stat">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">AI Generated</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search & Filter -->
+  <section class="filter-section" id="gallery">
+    <div class="filter-container">
+      <div class="search-box">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Search artworks..." class="search-input">
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="portrait">Portraits</button>
+        <button class="filter-tab" data-filter="landscape">Landscapes</button>
+        <button class="filter-tab" data-filter="abstract">Abstract</button>
+        <button class="filter-tab" data-filter="other">Other</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Grid -->
+  <section class="gallery-section">
+    <div class="gallery-grid" id="galleryGrid">
+      <!-- Images loaded dynamically -->
+    </div>
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Loading artworks...</p>
+    </div>
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+        <polyline points="21 15 16 10 5 21"></polyline>
+      </svg>
+      <h3>No images found</h3>
+      <p>Try a different search or filter</p>
+    </div>
+  </section>
+
+  <!-- Image Modal -->
+  <div class="modal" id="imageModal">
+    <button class="modal-close" id="closeModal">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="modal-content">
+      <div class="modal-image-wrapper">
+        <img src="" alt="" id="modalImage" class="modal-image">
+      </div>
+      <div class="modal-info">
+        <div class="modal-header">
+          <h2 id="modalTitle">Image Title</h2>
+          <span class="modal-category" id="modalCategory">Category</span>
+        </div>
+        <p class="modal-description" id="modalDescription">Description</p>
+        <div class="modal-meta">
+          <span class="meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            </svg>
+            <span id="modalSize">Size</span>
+          </span>
+          <span class="meta-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <span id="modalDate">Date</span>
+          </span>
+        </div>
+        <button class="download-btn-large" id="downloadBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download High Quality
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Login Modal -->
+  <div class="modal" id="adminModal">
+    <button class="modal-close" id="closeAdmin">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="admin-login">
+      <h2>Admin Access</h2>
+      <p>Enter password to upload images</p>
+      <input type="password" id="adminPassword" placeholder="Password" class="admin-input">
+      <button class="admin-submit" id="adminSubmit">Login</button>
+      <p class="admin-error" id="adminError"></p>
+    </div>
+  </div>
+
+  <!-- Admin Panel -->
+  <div class="admin-panel" id="adminPanel">
+    <div class="admin-header">
+      <h2>Upload New Artwork</h2>
+      <button class="admin-close" id="closePanel">✕</button>
+    </div>
+    <div class="upload-form">
+      <div class="upload-area" id="uploadArea">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <p class="upload-text">Drag & drop your image here</p>
+        <p class="upload-hint">or click to browse • Max 50MB</p>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+      <div class="form-group">
+        <label for="imageTitle">Title</label>
+        <input type="text" id="imageTitle" placeholder="e.g., Cyberpunk Portrait" class="form-input">
+      </div>
+      <div class="form-group">
+        <label for="imageDescription">Description (optional)</label>
+        <textarea id="imageDescription" placeholder="Brief description of the artwork..." class="form-textarea"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="imageCategory">Category</label>
+        <select id="imageCategory" class="form-select">
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Landscape</option>
+          <option value="abstract">Abstract</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <button class="upload-submit" id="uploadSubmit">Upload Artwork</button>
+      <div class="upload-progress" id="uploadProgress" style="display: none;">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">Uploading...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="about-container">
+      <h2 class="about-title">About Creative Corex</h2>
+      <p class="about-text">
+        Creative Corex specializes in AI-generated art, pushing the boundaries of digital creativity.
+        Every piece is crafted using cutting-edge AI technology, blending artistic vision with computational power.
+        All images are available for download in high quality.
+      </p>
+      <div class="social-links">
+        <a href="https://instagram.com/creativecorex" target="_blank" class="social-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          Follow on Instagram
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2024 Creative Corex. All AI-generated artworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

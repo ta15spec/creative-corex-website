@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: creative-corex-gallery
+    runtime: node
+    buildCommand: cd backend && npm install
+    startCommand: node backend/server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+    # Optional: Add a persistent disk for uploads (costs $1/month for 1GB)
+    # Uncomment the lines below if you want persistent storage
+    # disk:
+    #   name: uploads-disk
+    #   mountPath: /opt/render/project/src/backend/uploads
+    #   sizeGB: 1

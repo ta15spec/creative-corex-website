@@ -1,0 +1,3 @@
+PLACEHOLDER: Add your profile picture here
+Rename your image to: profile.jpg
+Recommended size: 400x400px or larger (square format)
